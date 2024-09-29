@@ -11,6 +11,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setCentralWidget(ui->textEdit);
+
+    if (file_path.isEmpty()) {
+        setWindowTitle("MyNotepad");
+    } else {
+        QFileInfo fileInfo(file_path);
+        setWindowTitle(fileInfo.fileName() + " - MyNotepad");
+    }
 }
 
 MainWindow::~MainWindow()
@@ -31,11 +38,30 @@ void MainWindow::on_actionNew_triggered()
         } else {
                 file_path = "";
                 ui->textEdit->setText("");
+
+                if (file_path.isEmpty()) {
+                    setWindowTitle("MyNotepad");
+                } else {
+                    QFileInfo fileInfo(file_path);
+                    setWindowTitle(fileInfo.fileName() + " - MyNotepad");
+                }    if (file_path.isEmpty()) {
+                    setWindowTitle("MyNotepad");
+                } else {
+                    QFileInfo fileInfo(file_path);
+                    setWindowTitle(fileInfo.fileName() + " - MyNotepad");
+                }
         }
     } else {
 
             file_path = "";
             ui->textEdit->setText("");
+
+            if (file_path.isEmpty()) {
+                setWindowTitle("MyNotepad");
+            } else {
+                QFileInfo fileInfo(file_path);
+                setWindowTitle(fileInfo.fileName() + " - MyNotepad");
+            }
         }
 }
 
@@ -54,6 +80,12 @@ void MainWindow::on_actionOpen_triggered()
     ui->textEdit->setText(text);
     file.close();
 
+    if (file_path.isEmpty()) {
+        setWindowTitle("MyNotepad");
+    } else {
+        QFileInfo fileInfo(file_path);
+        setWindowTitle(fileInfo.fileName() + " - MyNotepad");
+    }
 }
 
 
@@ -74,6 +106,13 @@ void MainWindow::on_actionSave_triggered()
     out<<text;
     file.flush();
     file.close();
+
+    if (file_path.isEmpty()) {
+        setWindowTitle("MyNotepad");
+    } else {
+        QFileInfo fileInfo(file_path);
+        setWindowTitle(fileInfo.fileName() + " - MyNotepad");
+    }
 }
 
 
@@ -91,6 +130,13 @@ void MainWindow::on_actionSave_As_triggered()
     out<<text;
     file.flush();
     file.close();
+
+    if (file_path.isEmpty()) {
+        setWindowTitle("MyNotepad");
+    } else {
+        QFileInfo fileInfo(file_path);
+        setWindowTitle(fileInfo.fileName() + " - MyNotepad");
+    }
 }
 
 
