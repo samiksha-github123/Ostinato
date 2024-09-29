@@ -20,8 +20,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionNew_triggered()
 {
-    file_path="";
-    ui->textEdit->setText("");
+
+    if (!ui->textEdit->toPlainText().isEmpty()) {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "New Document","There is unsaved text in the current document. Do you want to create a new document in a separate window?",QMessageBox::Yes | QMessageBox::No);
+
+        if (reply == QMessageBox::Yes) {
+               MainWindow *newWindow = new MainWindow();
+                newWindow->show();
+        } else {
+                file_path = "";
+                ui->textEdit->setText("");
+        }
+    } else {
+
+            file_path = "";
+            ui->textEdit->setText("");
+        }
 }
 
 
@@ -44,6 +59,11 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionSave_triggered()
 {
+
+    if (file_path.isEmpty()){
+        on_actionSave_As_triggered();
+        return;
+    }
     QFile file(file_path);
     if(!file.open(QFile::WriteOnly | QFile::Text)){
         QMessageBox::warning(this,"..","file not open");
